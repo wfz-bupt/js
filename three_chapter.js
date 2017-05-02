@@ -58,10 +58,74 @@ js中，所有数值都以IEEE-754 64位格式存储，但位操作符直接操�
 左移：<<
 有符号的右移：>>
 无符号右移：>>>
+布尔操作符：与(&&)、或(||)、非(!)
+非操作符后跟任意类型的变量，结果为true或者false。
+或和非操作符，左右两边可以为任意数据类型的变量，返回值不一定非得是true或者false。
+例如：Object1 && Object2 = Object2   Object1 || Object2 = Object1
+乘性操作符：如果操作符两边不是数值，则调用number()函数转换成数值后再执行操作。
+
 */
 function not_and_or_xor_left_right(){
 	var num1 = 25;
 	var num2 = ~num1;
 	// console.log(num2);  -26
-	
+	//位操作符
 }
+/*
+乘性操作符
+加性操作符：
+加号操作符：如果有一个数为字符串，则调用toString方法将另一个数转换为string，再进行字符串
+的拼接
+减号操作符：如果有一个操作数为字符串，则将字符串用Number函数转换为数字后，再进行数字相减
+*/
+function cheng_jia_operator(){
+	6 * NaN = NaN;
+	Infinity * 0 = NaN;
+	Infinity * 3 = Infinity;
+	Infinity * -3 = -Infinity;
+	Infinity * Infinity = Infinity;
+	6 * '4' = 24;
+
+	6 / NaN = NaN;
+	NaN / 6 = NaN;
+	Infinity / Infinity = NaN;
+	0 / 0 = NaN;
+
+	'3'+ 4 = '34'; 
+	4-'2' = 2;
+	4 - null = 4;
+}
+/*
+关系操作符：
+1.如果两个字符串，则比较字符的字符编码大小。 
+2 如果一个数是数值，则优先数值，将另一个操作数转换为数值
+*/
+function relationship_operator(){
+	'23' < '3';
+	23 > '3';
+	'a' < 3 = NaN < 3 = false;
+}
+/*
+相等操作符==：
+如果是对象，要调用valueOf 、toString方法
+===:
+不进行任何类型转换直接比较
+最佳实践：使用＝＝＝而不是＝＝
+*/
+function equal_oper(){
+	true == 1; //true,true转换为数值
+	'2'  == 2; //优先数值，将'2'转换为2
+	null == undefined;
+}
+/*
+for_in函数用来枚举对象的属性
+*/
+function for_in(){
+
+}
+/*函数
+最佳实践：要么让函数永远返回值，要么让函数永远不返回值。这样做的好处是：便于调试方便。
+js函数与其它语言函数的区别：写不写参数、写几个都没有问题。它是通过arguments来获得参数
+的。arguments的长度由传入的参数个数决定。参数都是值传递，而不是引用传递。
+*/
+
