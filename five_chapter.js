@@ -281,6 +281,9 @@ function object_test(){
 		search方法：从字符串开头向后查找
 		replace方法：第一个参数为要替换的字符串，或者正则表达式。第二个参数为替换成的
 		字符串。如果想替换全部的字符串，要使用正则表达式，且g模式。
+		localeCompare方法：如果字符串在字母表中应该排在字符串参数之前，则返回一个
+		负数，反之则返回正数
+		fromCharCode：参数为字符编码，转换为字符串
 		*/
 		function num_obj_test(){
 			var numObj = new Number(10);
@@ -308,11 +311,47 @@ function object_test(){
 			var text = "cat,bat,sat,fat";
 			var result = text.replace('at','ond'); //'cond,bat,sat,fat'		
 			var result = text.replace('at/g','ond');//cond bond sond fond
-			
+
+			stringValue.localeCompare('dd');
 		}
-		string_test();
+		//string_test();
 
-
+		/*
+		*5.7单体内置对象
+		*内置对象：由ECMAscript实现提供的，不依赖于宿主环境的对象。比如基本数据类型
+		和Function、RegExpr、object
+		Global：不属于任意对象的属性和方法都是global对象的属性和方法。例如：isNaN、
+		parseInt、parseFloat方法，另外还有encodeURI、encodeURIComponent方法
+		encodeURI：对URI进行编码，使得浏览器可以识别。对整个uri进行编码。不会对本身属于
+		uri的特殊字符进行编码。对应的解码函数：decodeURI：只能用这个
+		encodeURIComponent：对部分uri进行编码。会对任何非标准字符进行编码。
+		对应的解码函数：decodeURIComponent：只能用这个
+		一般来说，使用encodeURIComponent多一点，因为只会对查询字符串进行编码。
+		＊＊＊＊＊＊＊＊继续解释uri的encode＊＊＊＊＊＊
+		URL 编码将字符转变成对 URL 解析无意义的无害形式。它将字符转化成为一种特定字符编码的字节序列，
+		然后将字节转换为16进制形式，并将其前面加上"%"。问号的 URL 编码形式为"%3F"。
+		我们可以将指向 "to_be_or_not_to_be?.jpg"图片的 URL 写成：
+		"http://example.com/to_be_or_not_to_be%3F.jpg"，
+		这样就没有人会认为这儿可能由一个查询部分了。
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+		eval方法：
+		global对象的属性：undefined、NaN、Infinity、Object、Array、Function、
+		Boolean、String、Number
+		直接访问global对象的方式：window对象代替其功能
+		Math对象
+		属性：E、LN10、LN2、LOG2E、LOG10E、PI、SQRT1_2、SQRT2
+		min和max方法：
+		舍入方法：Math.ceil向上舍入、Math.floor下、Math.round标准四舍五入
+		其它方法：
+		abs、exp、log、pow、sqrt、acos、asin、atan、atan2、cos、sin、tan
+		*/
+		function encodeURI_test(){
+			var url = "http://www.wrox.com/illegal value.html#start";
+			encodeURI(url);// "http://www.wrox.com/illegal%20value.html#start"
+			encodeURIComponent(url);
+			//http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.html%23start将所有非
+			//数字字母全部转换了，所以用这个函数只能转部分的uri
+		}
 	}
 	function_test();
 
