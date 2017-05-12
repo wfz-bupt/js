@@ -192,7 +192,9 @@ function object_test(){
 	/*
 	*函数是对象，函数名是指针。既然函数是对象，那么它就有属性和方法，
 	函数对象有2个属性，length和prototype，length是函数希望接收的参数的个数。
-	函数对象有2个方法，call和apply方法
+	函数对象有2个方法，call和apply方法,还有一个方法bind方法. 
+	call、apply方法改变this指向并执行，apply参数一次性传入，call参数依次传入。
+	bind方法返回一个方法，一个指定了this的方法
 	解析器对待函数声明和函数表达式的方式不同。对待函数声明会提前解析，而函数表达式会在执行
 	到表达式那一行时
 	函数可以作为参数，也可以返回一个函数
@@ -252,6 +254,63 @@ function object_test(){
 		}
 		this_test.apply({name:'wfz'});
 
+		/*
+		5.6 三种基本包装类型Boolean Number String
+		Number是与数字值对应的引用类型
+		重写了valueof、toString、方法，新添加：
+		toFixed:
+		toExponential方法
+		最佳实践：不建议直接实例化 Number和Boolean类型
+		string类型：访问字符方法
+		访问特定位置字符的方法：charAt、charCodeAt、参数为索引
+		*＊＊＊字符串操作方法：＊＊＊＊
+		concat：将2个字符串连接成一个字符串
+		slice：参数依次为：开始字符索引、结束字符索引下一位置。负数加上字符串长度。
+		substring：参数依次为：开始字符索引、结束字符索引下一位置。所有负数变为0
+		substr:参数依次为：开始字符索引、字符个数，如果第一个参数为负数，则加上字符串长度
+		如果第二个参数为负数，则变为0
+		当传入的参数为负数的时候，返回结果不同，见例子,
+		＊＊＊＊字符串位置方法＊＊＊＊
+		indexOf:从字符串中搜索给定字符串的位置。从前往后搜索。第二个参数指定从哪个位置开始搜索
+		lastIndexOf：从后往前搜索.
+		trim()：删除字符串前和后的所有空格
+		字符串大小写转换方法：toLowerCase、toLocaleLowerCase
+		toUpperCase、toLocaleUpperCase。使用针对地区的方法更稳妥
+		＊＊＊＊＊＊＊字符串的模式匹配＊＊＊＊＊＊＊＊
+		match方法：在字符串上匹配模式
+		search方法：从字符串开头向后查找
+		replace方法：第一个参数为要替换的字符串，或者正则表达式。第二个参数为替换成的
+		字符串。如果想替换全部的字符串，要使用正则表达式，且g模式。
+		*/
+		function num_obj_test(){
+			var numObj = new Number(10);
+			numObj.toString();
+		}
+		function string_test(){
+			var stringValue = "hello woreld";
+			stringValue.charAt(1); //e
+			stringValue.charCodeAt(1);//"101"
+
+			stringValue.slice(-3); //-3+11，参数加上字符串长度 rld
+			stringValue.substring(-3);//负数都变为0，hello world
+			stringValue.substr(-3);
+			//利用indexOf查找所有匹配字符串
+			var pos = stringValue.indexOf('el');
+			var result = new Array();
+			while(pos>-1){
+				result.push(pos);
+				pos = stringValue.indexOf('el',pos+1);
+			}
+			console.log(result);
+			//匹配方法
+			stringValue.match('/.o/');
+			stringValue.search('/.o/');	
+			var text = "cat,bat,sat,fat";
+			var result = text.replace('at','ond'); //'cond,bat,sat,fat'		
+			var result = text.replace('at/g','ond');//cond bond sond fond
+			
+		}
+		string_test();
 
 
 	}

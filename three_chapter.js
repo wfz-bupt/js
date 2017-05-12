@@ -1,4 +1,13 @@
 /*
+js简单数据类型（基本数据类型）：undefined null boolean number string 
+复杂数据类型（引用类型）：object
+还有3种基本包装类型（Boolean、number、string）
+基本类型没有属性和方法
+基本类型、引用类型的声明周期
+
+*/
+
+/*
 js数值转换函数：Number、parseInt、parseFloat。
 Number函数参数可以是任意类型的数据，而后两个函数参数必须是 字符串。
 
