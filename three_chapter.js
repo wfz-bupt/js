@@ -1,10 +1,14 @@
+function one_test(){
+	var s = "1.1"; //+s 1.1  －s: -1.1
+	s="z";  //+s NaN  -s:NaN
+	s=false; // 0    -s: 0
+}
 /*
 js简单数据类型（基本数据类型）：undefined null boolean number string 
 复杂数据类型（引用类型）：object
 还有3种基本包装类型（Boolean、number、string）
 基本类型没有属性和方法
 基本类型、引用类型的声明周期
-
 */
 
 /*
@@ -81,7 +85,10 @@ function not_and_or_xor_left_right(){
 	//位操作符
 }
 /*
-乘性操作符
+乘性操作符：包括 乘法、除法和取模
+乘法：如果有一个操作数为非数值，则调用number方法转换后，再运算
+除法：如果有一个操作数为非数值，则调用number方法转换后，再运算
+取模：如果有一个操作数为非数值，则调用number方法转换后，再运算
 加性操作符：
 加号操作符：如果有一个数为字符串，则调用toString方法将另一个数转换为string，再进行字符串
 的拼接

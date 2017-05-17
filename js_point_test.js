@@ -17,3 +17,32 @@ String.prototype.repeatify = String.prototype.repeatify||function(num){
 	return result;
 }
 console.log('hello'.repeatify(3));
+
+/*
+变量提升、函数提升
+什么时候会变量提升？什么时候会函数提升？？
+*/
+var a,b;
+(function(){
+    alert(a);
+    alert(b);
+    var a=b=3;
+    alert(a);
+    alert(b);
+})();
+alert(a);
+alert(b);
+/*不会*/
+var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log(this.foo);  
+        console.log(self.foo);  
+        (function() {
+            console.log(this.foo);  
+            console.log(self.foo);  
+        }());
+    }
+};
+myObject.func();
