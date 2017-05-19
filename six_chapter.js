@@ -90,6 +90,20 @@ function defineProperties_test(){
 每个函数都有一个原型属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由
 特定类型的所有实例共享的属性和方法。
 好处：让所有对象实例共享它包含的属性和方法
+为什么实例共享了属性和方法？
+因为，在访问实例的某个属性时，会先在实例中找，如果没有则向实例指向的原型中找。
+判断某个属性存在与实例中，还是存在于原型中，判断方法为：hasOwnProperty
+in操作符：属性 in 对象，如果能通过对象访问到属性，则返回true
+用for in可以枚举对象，返回所有能通过对象访问的、可枚举的属性。包括屏蔽了原型中不可
+枚举属性的实例属性。
+Object.keys():所有可枚举的实例属性
+Object.getOwnPropertyNames():获取所有实例属性，无论是否可枚举
+3.1更简单的原型模式
+原型对象更大的问题：想要每个对象实例保存有自己的属性，共享方法
+所以，一般来说，没有单独使用原型模式创建数据类型的，都是采用构造函数模式和原型模式
+联合的方法
+4。不常见的小众的方法
+动态原型模式、寄生构造函数模式、稳妥构造函数模式
 */
 //工厂模式 创建对象
 function createPerson(name,age,job){
@@ -117,12 +131,129 @@ function Person(name,age,job){
 var person1 = new Person('wfz',25,'teach');
 var person2 = new Person('thy',23,'dd');
 //原型模式构建对象
-function Person(){
-
+function Person(name){
+	this.name = name;
 }
 Person.prototype.name = 'Nicholas';
 Person.prototype.age = 29;
 Person.prototype.job = 'Soft';
 Person.prototype.sayName = function(){
 	console.log(this.name);
+}
+new Person().hasOwnProperty('name'); //fasle
+name  in new Person(); //true
+for key in new Person('wfz')
+	console.log(key); //实例和原型中所有可枚举属性
+Object.keys(new Person('wfz'));
+Object.getOwnPropertyNames(new Person('wfz'));
+
+/*
+更简单的原型模式
+与原型模式的区别：原型对象的constructor不再指向构造函数，因为重写了prototype对象
+解决办法：手动添加constructor
+*/
+function Person(){
+
+}
+Person.prototype = {
+	constructor: Person,
+	name: 'wfz',
+	age: 29,
+	job: 'tea',
+	sayName: function(){
+		console.log(this.name);
+	}
+};
+/*组合使用两种方法
+构造函数模式和原型模式共用, 目前是使用最广泛、认同度最高的创建自定义类型的方法
+*/
+function Person(name,age,job){
+	this.name = name;
+	this.age = age;
+	this.job = job;
+	this.friends = ["s","c"];
+}
+Person.prototype = {
+	constructor: Person,
+	sayName: function(){
+		console.log(this.name);
+	}
+}
+//动态原型模式
+function Person(name,age,job){
+	this.name = name;
+	this.age = age;
+	this.job = job;
+	if(typeof this.sayName !== "function"){
+		Person.prototype.sayName = function(){
+			console.log(this.name);
+		}
+	}
+}
+/*
+6.3继承
+js通过原型链实现继承
+本质上是 原型搜索机制，即如果实例中没有，则向上搜索原型
+确定实例和原型间的关系，方法：instanceof、isPrototypeOf
+只要实例所在的原型链中出现的原型，都会返回true
+原型链的问题：
+1.父类的实例现在是原型，实例中的属性是实例单独享有的，现在变成子类共享的，不合理。
+2.没办法向父类中传递参数
+实际使用中，很少单独使用原型链实现继承
+多数情况下使用借用构造函数和原型链组合的继承方法，优点：父类希望独有的属性，子类依然会独有。
+借用构造函数：为了继承并独享属性  原型链：为了共享某些属性和方法
+缺点：会调用两次 超类型的构造函数
+
+其它3种不常见的继承方法：
+1.原型式继承：
+2.寄生式继承
+3.寄生组合式继承：开发人员普遍认为，寄生组合式继承是引用类型最理想的继承范式
+*/
+//原型链继承
+function SuperType(name){
+	this.name;
+}
+SuperType.prototype.sayName = function(){
+	console.log(this.name);
+}
+function SubType(name){
+	this.name = name;
+}
+subType.prototype = new SuperType();
+new SubType("wfz").sayName();
+new SubType("wfz") instanceof Object; //true
+new SubType("wfz") instanceof SuperType; //true
+new SubType("wfz") instanceof SubType; //true
+//借用构造函数继承
+function SuperType(name){
+	this.name = name;
+}
+SuperType.prototype.sayName = function(){
+	console.log(this.name);
+}
+function SubType(name){
+	SuperType.call(this,name); //继承了属性，并且独享,传递子类想设置的属性值
+}
+SubType.prototype = new SuperType("wfz");
+console.log(new SubType().sayName());
+//原型式继承,相当于浅复制对象。基本类型值会独享，引用类型值会共享，除非，重写了值，
+//切断了指针和数据间的联系
+function object(o){
+	function F(){};
+	F.prototype = o;
+	return new F();
+}
+var person = {
+	name : "wfz"
+};
+var another = object(person);
+another.name = "thy";
+console.log(another.name);
+//寄生式继承,拥有了original的属性和方法，同时有了自己的方法
+function createAnother(original){
+	var clone = object(original);
+	clone.sayHi = function(){
+		alert("hi");
+	};
+	return clone;
 }
