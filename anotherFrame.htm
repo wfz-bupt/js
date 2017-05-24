@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>another frameset test</title>
+	<script type="text/javascript">
+		console.log(window.name);
+		console.log(top.name);
+		console.log(parent.name);
+	</script>
+</head>
+<frameset rows="160,*">
+		<frame src="another1.htm" name="leftFrame">
+		<frame src="another2.htm" name="rightFrame">
+</frameset>
+</html>

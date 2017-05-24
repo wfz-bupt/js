@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>window open_resize_move test</title>
+	
+</head>
+<!-- <frameset rows="160,*">
+	<frame  name="topFrame"></frame>
+	<frameset cols="50%,50%">
+		<frame src="anotherFrame.htm" name="leftFrame">
+		<frame src="yetanotherframe.htm" name="rightFrame">
+	</frameset>
+</frameset> -->
+<body>
+	<div>
+    <span id="span1">打开窗口</span>
+    <span id="span2">关闭窗口</span>    
+</div>
+<script>
+// var w;
+// span1.onclick = function(){
+//     w = window.open("http://qq.com","topFrame","height=300,width=400,top=200,left=200"); //打开qq.com可以，打开baidu.com不可以
+//     w.resizeTo(800,800);
+//     w.moveTo(50,60);
+// }
+// span2.onclick = function(){
+//     if(w){
+//         w.close();
+//     }
+// }
+w = window.open("http://qq.com","topFrame","height=300,width=400,top=200,left=200");
+console.log(w);
+</script>
+</body>
+	
+</html>
