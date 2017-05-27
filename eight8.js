@@ -48,7 +48,13 @@ window.location
 location.replace :不会产生历史纪录
 location.reload(),无参数为从缓存，有true参数为从服务器
 8.3 navigator对象
-
+8.4 history对象
+有几个方法：history.go(-1)
+history.go(1)
+history.go("http://www.baidu.com")
+history.forward()
+history.back()
+判断页面是否是用户打开浏览器的第一个页面
 */
 var age = 29;
 window.color = "red";

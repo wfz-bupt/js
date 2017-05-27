@@ -25,3 +25,11 @@ function getQueryStringArgs(){
 	return args;
 }
 //检测浏览器安装的插件 p212
+/*
+在浏览器环境下，测试任何对象的某个特性是否存在，使用以下函数
+*/
+function isHostMethod(object,property){
+	var t = typeof object[property];
+	return t == 'function' || (!!(t=='object'&&object[property])) || 
+			t == 'unknow';
+}
