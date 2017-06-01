@@ -1,3 +1,4 @@
+
 function one_test(){
 	var s = "1.1"; //+s 1.1  －s: -1.1
 	s="z";  //+s NaN  -s:NaN
