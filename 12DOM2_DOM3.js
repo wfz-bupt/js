@@ -85,8 +85,34 @@ scrollHeight：在没有滚动条的情况下，元素内容的总高度
 scrollWidth：在没有滚动条的情况下，元素内容的总宽度
 scrollLeft：被隐藏在内容区域左侧的像素数
 scrollTop：被隐藏在内容区域上方的像素数
+跨浏览器获得文档的总高度、总宽度
+4.确定元素大小
+getBoundingClientRect方法，返回元素相对于视口的位置的矩形对象，
+包括left top bottom right。例子
+12.3 遍历
+DOM2级遍历和范围模块定义了两个用于辅助完成顺序遍历dom结构的类型，
+NodeIterator和TreeWalker。 基于给定的起点对DOM结构进行深度优先
+遍历，监测例子
+12.3.1 NodeIterator
+document.createNodeIterator
+例子：创建一个只显示p元素的节点迭代器
+例子：利用NodeTterator对象的nextNode方法深度遍历dom树
+12.3.2 TreeWalker
+document.createTreeWalker
+更灵活，可以随意的在任意方向上遍历dom结构，使用方法与nodeIterator
+相同。
+12.4 范围
+dom2级定义了范围接口
+用来选择文档上的某个区域
+12.4.1 dom中的范围
+检测浏览器是否支持 例子
+每个range类型的实例的属性和方法
+startContainer: 包含范围起点的节点
+startOffset: 范围在startContainer中起点的偏移量
+endContainer：包含范围终点的节点
+endOffset：范围在endContainer的偏移量
+commonAncestorContainer
 */
-
 //监测浏览器是否支持某些dom模块
 var supportsDOM2Core = document.implementation.hasFeature("Core","2.0");
 var supportsDOM2HTML = document.implementation.hasFeature("HTML","2.0");
@@ -109,6 +135,7 @@ function getStyleSheet(element){
 var link = document.getElementsByTagName("link")[0];
 var sheet = getStyleSheet(link);
 
+//跨浏览器获得元素距离页面最左边的距离
 function getElementLeft(element){
     var actualLeft = element.offsetLeft;
     var current = element.offsetParent;
@@ -132,6 +159,78 @@ function getViewport(){
         }
     }
 }
+
+// 跨浏览器获得文档的总高度、总宽度
+var docHeight = Math.max(document.documentElement.scrollHeight,
+                    document.documentElement.clientHeight)
+
+//跨浏览器获得元素距离视口的距离，ie8及以前认为文档左上角坐标为（2，2）
+function getBoundingClientRect(element){
+    var scrollTop = document.documentElement.scrollTop;
+    var scrollLeft = document.documentElement.scrollLeft;
+
+    if(element.getBoundingClientRect){
+        if(typeof arguments.callee.offset != 'number'){
+            var scrollTop = document.documentElement.scrollTop;
+            var temp = document.createElement('div');
+            temp.style.cssText = "position:absolute; left:0; right:0;";
+            document.body.appendChid(temp);
+            arguments.callee.offset = -temp.getBoundingClientRect().top
+                                    -scrollTop;
+            document.body.removeChild(temp);
+            temp = null;
+        }
+        var rect = element.getBoundingClientRect();
+        var offset = arguments.callee.offset;
+        return {
+            left: rect.left + offset,
+            top: rect.top + offset,
+            right: rect.right + offset,
+            bottom: rect.bottom + offset,
+        }
+    }else{
+        var actualLeft = getElementLeft(element);
+        var actualTop = getElementTop(element);
+        return {
+            left: actualLeft - scrollLeft,
+            top: actualTop - scrollTop,
+            right: actualLeft + element.offsetWidth -scrollLeft;
+            bottom: actualTop + element.offsetHeight - scrollTop;
+        }
+    }
+}
+//监测浏览器对dom2级遍历支持的情况
+var supportsTraversals = document.implementation.hasFeature("Traversal","2.0");
+var supportsNodeIterator = (typeof document.createNodeIterator == "function");
+var supportsTreeWalker = (typeof document.createTreeWalker == "function");
+//创建一个只显示p元素的节点迭代器
+var filter = {
+    acceptNode: function(node){
+        return node.tagName.toLowerCase() == "p"?
+                NodeFilter.FILTER_ACCEPT:
+                NodeFilter.FILTER_SKIP;
+    }
+};
+var iterator = document.createNodeIterator(root, NodeFilter
+    .SHOW_ELEMENT, filter,false);
+
+// 利用NodeTterator对象的nextNode方法深度遍历dom树
+// 利用TreeWalker对象的遍历dom树
+
+var div = document.getElementById("div1");
+var iterator = document.createNodeIterator(div,NodeFilter.SHOW_ELEMENT,
+    null ,false);
+var node = iterator.nextNode(); //指向跟节点
+while(node!==null){
+    console.log(node.tagName);
+    node = iterator.nextNode();
+}
+
+var walker =  document.createTreeWalker(div,NodeFilter.SHOW_ELEMENT,
+    null ,false);
+// 检测浏览器是否支持range接口
+var supportsRange = document.implementation.hasFeature('Range','2.0');
+var alsoSupportsRange = (typeof document.createRange == 'function');
 //一个标准的xhtml页面
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head></head>
