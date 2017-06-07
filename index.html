@@ -11,6 +11,15 @@
 		</style>
 	</head>
 	<body>
-		<div></div>
+        <p id="p1"><b>hello</b>world</p>
+        <script type="text/javascript">
+			var p1 = document.getElementById("p1");
+			var helloNode = p1.firstChild.firstChild;
+			var worldNode = p1.lastChild;
+			var range = document.createRange();
+			range.setStart(helloNode,2);
+			range.setEnd(worldNode,3);
+			range.deleteContents();
+        </script>
 	</body>
 </html>
