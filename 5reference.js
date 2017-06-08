@@ -46,6 +46,7 @@ function object_test(){
 	pop:  返回弹出的成员
 	shift: 返回移除的数组首个成员
 	unshift: 返回数组长度
+	find: 查找
 	sort: 先调用每一项的toString方法，然后再比较字符串的大小。这种方式显然不好，因此，
 	sort函数可以接收一个比较函数，这个函数的特点为：compare(arg1,arg2){
 		如果你想让第一个参数在第二个参数之前，应该返回负数，反之正数
