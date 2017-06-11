@@ -84,6 +84,29 @@ error：当发生javascript错误时在window上触发
 select: 当用户选择文本框的一个或者多个字符时触发
 resize: 当窗口或者框架的大小变化时在window或者框架上触发
 scroll：当用户滚动在滚动条的元素时
+1.load事件
+当页面完全加载后触发，包括图片和一些外部资源文件
+定义load的方式，例子
+图像上也可以触发load事件
+只要设置了img.src，图片就开始下载，即便这个图片还没有添加到文档中
+还有一些元素以非标准的方式支持load事件，例script和link的load
+2.unload事件
+只要用户从一个页面切换到另一个页面，就会触发unload事件
+3. resize事件
+例子
+4.scroll
+由于resize和scroll事件会被频繁触发，因此，不宜处理大量计算
+13.4.2 焦点事件
+有6个焦点事件
+blur:在元素失去焦点时，事件不会冒泡
+DOMFocusIn：元素获得焦点时触发，只有opera支持
+DOMFocusOut：元素失去焦点时触发，只有opera支持
+focus：获得焦点时，不会冒泡
+focusin：获得焦点，与focus等价，但是会冒泡
+focusout：与blur等价
+13.4.3 鼠标和滚轮事件
+dom3级定义了9个鼠标事件
+
 */
 document.getElementById("myButton").onclick = function(event){
     event.preventDefault();
@@ -93,3 +116,11 @@ document.getElementById("myButton").onclick = function(){
     var event = window.event;
 }
 document.getElementById("myButton").attachEvent("onclick",function(event){})
+
+EventUtil.addEventListener(window,"load",function(){});
+
+<img src="smile.gif" onload="alert('dd')"/>
+EventUtil.addEventListener(image,"load",function(){});
+
+EventUtil.addEventListener(window,"resize",function(){});
+
