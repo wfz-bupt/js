@@ -51,6 +51,34 @@ var EventUtil = {
 	getTarget: function(event){
 		return event.target || event.srcElement;
 	},
+	//针对mouseout和mouseover
+	getRelatedTarget: function(event){
+		if(event.relatedTarget){
+			return event.relatedTarget
+		}else if(event.toElement){
+			return event.toElement;
+		}else if(event.fromElement){
+			return event.fromElement;
+		}else{
+			return null;
+		}
+	},
+	//跨浏览器的鼠标滚轮增量值,opera9.5正负值颠倒 firefox事件名不一样
+	getWheelDelta: function(event){
+		if(event.wheelDelta){
+			return (client.engine.opera&&client.engine.opera<9.5?
+				-event.wheelDelta:event.wheelDelta);
+		}else{
+			return -event.detail*40;
+		}
+	},
+	getCharCode: function(event){
+		if(typeof event.charCode == 'number'){
+			return event.charCode;
+		}else{
+			return event.keyCode;
+		}
+	},
 	preventDefault: function(event){
 		if(event.preventDefault){
 			event.preventDefault();
