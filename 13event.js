@@ -280,7 +280,25 @@ js与dom连接少，提升性能
 13.6 模拟事件
 IE9、Opera、Firefox、Chrome和Safari都支持模拟事件
 13.6.1 DOM中的事件模拟
-
+document.createEvent()，创建event对象，参数为要创建的事件类型的
+字符串。以下之一：UIEvents、MouseEvents、MutationEvents、HTMLEvents
+在DOM3中，events为event
+触发事件：dispatchEvent()方法，参数为触发事件的event对象
+1.模拟鼠标事件
+例子，模拟对按钮的单击事件
+2.模拟键盘事件
+DOM3级规定的键盘事件。DOM3不提倡使用keypress事件，因此，只能利用此
+技术来模拟keydown和keyup事件，例子
+3.模拟其他事件
+指的是变动事件和html事件，但是，它们很少使用，因为受到的限制较多。
+4.自定义DOM事件
+调用createEvent("CustomEvent"),返回一个名为initCustomEvent对象
+例子，支持此事件的浏览器有IE9+、Firefox6+
+13.6.2 IE中的事件模拟
+利用document.createEventObject()方法创建event对象
+首先创建event对象，然后在元素上触发事件。就像系统自动触发的一样
+例子
+13.7 小结
 */
 document.getElementById("myButton").onclick = function(event){
     event.preventDefault();
@@ -355,3 +373,35 @@ EventUtil.addHandler(list,'click',function(event){
         }
     }
 })
+//模拟鼠标的点击事件
+var btn = document.getElementById('myBtn');
+var event = document.createEvent("MouseEvents");
+event.initMouseEvent("click",true,true,document.defaultView,0,0,0,0,0,false,
+    false,false,false,0,null);
+// 模拟keydown和keyup事件
+var textBox = document.getElementById("myTextBox");
+ event;
+if(document.implementation.hasFeature("KeyboardEvents","3.0")){
+    event = document.createEvent("KeyboardEvent");
+    event.initKeyboardEvent("keydown",true,true,document.
+        defaultView, "a",0,"shift","0");
+}
+textBox.dispatchEvent(event);
+//自定义事件
+var div = document.getElementById('myDiv');
+var event;
+EventUtil.addHandler(div,'myevent',function(){});
+if(document.implementation.hasFeature("CustomEvents","3.0")){
+    event = document.createEvent("CustomEvent");
+    event.initCustomEvent("myevent",true,false,"hello world");
+    div.dispatchEvent(event);
+}
+//IE中模拟事件
+var btn = document.getElementById('myBtn');
+btn.fireEvent('onclick',event);
+var event = document.createEventObject();
+event.screenX = 100;
+event.screenY = 0;
+event.clientX = 0;
+..
+event.button = 0;
