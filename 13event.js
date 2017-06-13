@@ -270,6 +270,17 @@ gesturechange：当触摸屏幕的任何一个手指的位置发生改变
 gestureend：当任何一个手指从屏幕上移开
 ios2.0的safari提供的
 13.5 内存和性能
+13.5.1 事件委托
+利用事件冒泡，只指定一个事件处理程序，就可以管理某一个类型的所有事件
+例子
+js与dom连接少，提升性能
+13.5.2 移除事件处理程序
+如果元素不在了，但是与之绑定的事件处理程序还在，它会继续存在内存里，
+影响性能，所以，如果你确定某个元素不在了，那么在移除这个元素之前，要先移除与之绑定的事件。这也是提升性能的方法。
+13.6 模拟事件
+IE9、Opera、Firefox、Chrome和Safari都支持模拟事件
+13.6.1 DOM中的事件模拟
+
 */
 document.getElementById("myButton").onclick = function(event){
     event.preventDefault();
@@ -320,4 +331,27 @@ EventUtil.addHandler(window,load,function(event){
     EventUtil.addHandler(window,"orientationchange",function(){
         console.log(window.orientation)
     });
+})
+
+//事件委托
+<ul id="myLinks">
+    <li id="goSomewhere"></li>
+    <li id="something"></li>
+    <li id="sayHi"></li>
+</ul>
+var list  = document.getElementById('myLinks');
+EventUtil.addHandler(list,'click',function(event){
+    EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    switch(target.id){
+        case "goSomewhere": {
+            break;
+        }
+        case "something": {
+
+        }
+        case "sayHi":{
+
+        }
+    }
 })
