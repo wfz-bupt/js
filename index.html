@@ -12,7 +12,12 @@
 	</head>
 	<body>
         <p id="p1"><b>hello</b>world</p>
+        <input type="text" size="5" maxlength="10" value="wowo" />
         <script type="text/javascript">
+        	var input = document.getElementsByTagName('input')[0];
+        	input.addEventListener('keypress',function(event){
+        		event.preventDefault();
+        	},false);
 			var p1 = document.getElementById("p1");
 			var helloNode = p1.firstChild.firstChild;
 			var worldNode = p1.lastChild;

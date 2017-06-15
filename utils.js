@@ -102,4 +102,36 @@ var EventUtil = {
 			element["on"+type] = null;
 		}
 	},
+	getClipboardText: function(event){
+		var clipboardData = (event.clipboardData||window.clipboardData);
+		return clipboardData.getData("text");
+	},
+	setClipboardText: function(event,value){
+		if(event.clipboardData){
+			return event.clipboardData.setData("text/plain",value);
+		}else if(window.clipboardData){
+			return window.clipboardData.setData("text",value);
+		}
+	}
 };
+
+function getSelectedText(textbox){
+    if(typeof textbox.value.selectionStart == "number"){
+        return textbox.value.substring(textbox.selectionStart,textbox.selectionEnd);
+    }else if(document.selection){
+        return document.selection.createRange().text;
+    }
+}
+
+function selectText(textbox, startIndex, stopIndex){
+    if(textbox.setSlectionRange){
+        textbox.setSlectionRange(startIndex,stopIndex);
+    }else if(textbox.createTextRange){
+        var range = textbox.createTextRange();
+        range.collapse(true);
+        range.moveStart("character",startIndex);
+        range.moveEnd("character", stopIndex - startIndex);
+        range.select();
+    }
+    textbox.focus();
+}
