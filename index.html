@@ -13,7 +13,18 @@
 	<body>
         <p id="p1"><b>hello</b>world</p>
         <input type="text" size="5" maxlength="10" value="wowo" />
+        <select name="location" id="selLocation">
+            <option value="Sunnyvale, CA">Sunnyvale</option>
+            <option value="b, CA">b</option>
+            <option value="c, CA">c</option>
+        </select> 
+        <div class="what" contenteditable>ddd</div>      
         <script type="text/javascript">
+            // 富文本交互
+            document.execCommand("bold",false,null);
+            document.execCommand("italic",false,null);
+
+
         	var input = document.getElementsByTagName('input')[0];
         	input.addEventListener('keypress',function(event){
         		event.preventDefault();

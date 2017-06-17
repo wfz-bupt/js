@@ -108,13 +108,90 @@ getData接收一个参数，即要取得的数据的格式，在iE中有两种�
 var isRequiredSupported = "required" in document.createElement("input")
 2.其他输入类型
 h5为input的type属性又增加了几个值，email和url是得到支持最多的类型
+另外还有 number、range、datetime、datetime－local、date、month、
+week还有time，目前这些浏览器的支持程度不怎好。慎用。
+对所有数值型的输入，可以指定min和max属性
+4输入模式
+html5为文本字段新增pattern属性，用正则表达式来匹配文本框中的值
+<input type="text" patter="\d+" name="count">
+判断是否支持输入模式
+"patter" in document.createElement("input")
+5. 检测有效性
+使用checkValidity()方法可以检测表单中的某个字段是否有效，所有表单字段
+都有这个方法。表单元素的validity属性告诉你，为啥字段不合法。
+该属性进一步包含以下属性
+customError
+patternMismatch
+rangeOverflow
+rangeUnderflow
+stepMismatch
+tooLong
+typeMismatch
+valid
+valueMissing
+6.禁用验证
+通过设置novalidate属性，可以告诉表单不尽兴验证
+<form method="post" action="" novalidate> </form>
+为了指定某个提交按钮不必验证表单，可以在相应按钮上添加formnovalidate
+属性
+14.3 选择框脚本
+选择框是通过select和option元素创建的，HTMLSelectionElement还提供了
+以下属性和方法
+add(newOption, relOption): 位置在relOption之前
+multipe: 是否允许多项选择
+options：控件中所有option元素的HTMLCollection
+remove(index): 移除给定位置的选项
+selectedIndex: 基于0的选中项的索引，如果没有选中项，则为－1
+size：选择框中可见的行数
+选择框的type属性不是"select-one"就是"select-multiple",选择框的value
+属性等于选中项的value。
+value的规则如下：
+优先级：value特性》text特性
+每个option元素都用一个HTMLOptionElement对象表示，该对象有以下属性：
+index：当前选项在optons集合中的索引
+lable：当前选项的标签
+selected：当前选项是否被选中
+text：选项的文本
+value：选项的值
+应该用options的方式取得option，而不是dom方式
+14.3.1 选择选项
+对option元素设置selected属性，可以使得select选中某一项
+14.3.2 添加选项
+1.dom方法
+2.new Option()构造方法，ie不行
+3.使用选择框的add方法
+14.3.3 移除选项
+1.dom方法
+2.remove方法
+14.3.4 移动和重排选项
+使用dom的appendChild方法，可以使得将文档中已经存在的节点，移动到指定的
+位置。移动选项会重置所有选项的index值
+重排：使用insertBefore方法
+14.4 表单序列化
+在表单提交期间，浏览器是怎么样将数据发送给服务端的
+i）对表单字段的名称和值进行url编码，使用&分割
+i）不发送禁用的表单字段
+i）不发送type为reset和button的按钮
+i）多选选择框中的每个选中的值单独一个条目
+i）
+实现表单序列化的代码，例子
+14.5 富文本编辑
+富文本编辑又称WYSIWYG，what you see is what you get.
+页面可编辑，通过设置designMode属性
+14.5.1 使用contenteditable属性
+14.5.2 操作富文本
+使用document.execCommand()与富文本编辑器进行交互
+还有document.queryCommandEnabled()
+document.queryCommandState()
+14.5.3 富文本选区
+14.5.4 表单和富文本
 */
-// 通用提交按钮
-// <input type="submit" value="Submit Form">
-// 自定义提交按钮
-// <button type="submit">Submit Form</button>
-// 图像按钮
-// <input type="image" src="img.gif">
+通用提交按钮
+<input type="submit" value="Submit Form">
+自定义提交按钮
+<button type="submit">Submit Form</button>
+图像按钮
+<input type="image" src="img.gif">
 //表单验证方法
 var form = document.getElementById('myForm');
 EventUtil.addHandler(form,"submit", function(event){
@@ -175,3 +252,37 @@ EventUtil.addHandler(textbox, "keypress", function(event){
         event.preventDefault();
     }
 })
+
+function serialize(form){
+    var parts = [],
+    field = null,
+    i,
+    len,
+    j,
+    optLen,
+    option,
+    optValue;
+    for(i=0, len=form.elements.length; i<len; i++){
+        field = form.elements[i];
+        swtich(filed.type){
+            case "select-one":
+            case "select-multiple":{
+                if(filed.name.length){
+                    for(j=0; j<filed.options.length; j++){
+                        option = filed.options[j];
+                        if(option.selected){
+                            optValue = "";
+                            if(option.hasAttribute){
+                                optValue = (option.hasAttribute("value")?
+                                            option.value: option.text);
+                            }else{
+                                optValue = 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,29 @@
+<html style="height: 100%; overflow: hidden;">
+    <head>
+        
+    </head>
+    <body style="height:100%; overflow: hidden;">
+        <div class="container">
+        <div style="height: 720px; background-color: red;"></div>
+        <div style="height: 720px; background-color: white;"></div>
+        <div style="height: 720px; background-color: blue;"></div>
+        <div style="height: 720px; background-color: orange;"></div>
+        <div style="height: 720px; background-color: pink;"></div>
+
+        </div>
+        <script type="text/javascript">
+            var current = 1;
+            var timer = null;
+            document.body.addEventListener("mousewheel", function(event){
+                if(timer){
+                    return false;
+                }
+                current++;
+                document.querySelector(".container").style.cssText = "transform: translate3d(0,"+ (-720 * current) +"px,0); ";
+                timer = setTimeout(function(){
+                    timer = null;
+                },700);
+            },false);
+        </script>
+    </body>
+</html>

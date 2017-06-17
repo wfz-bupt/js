@@ -142,7 +142,7 @@ event.shiftKey event.ctrlKey  event.altKey  event.metaKey
 7 更多的事件信息
 event.detail
 8 鼠标滚轮事件
-浏览器（IE6、chrome、safari）都支持mouseWheel这个事件
+浏览器（IE6、chrome、safari）都支持mousewheel这个事件
 event对象包含一个wheelDelta属性，当用户向前滚动鼠标滚轮时，wheelDelta
 是120的倍数，当向后滚动时，是－120的倍数。
 firefox浏览器支持DOMMouseScroll事件
