@@ -11,6 +11,12 @@
 		</style>
 	</head>
 	<body>
+        <div class="big" style="width:216px; height:388px; background: url('../img/s1_people_2.png') center center/cover no-repeat;">
+        </div>
+
+        <div class="big" style="width:216px; height:388px; background: url('../img/s1_people.png') center center/cover no-repeat;"> 
+        </div>
+
         <p id="p1"><b>hello</b>world</p>
         <input draggable="true" type="text" size="5" maxlength="10" value="wowo" />
         <select name="location" id="selLocation">
@@ -33,16 +39,16 @@
                 context.strokeStyle="red";
                 context.fillStyle = "black";
                 context.shadowOffsetX = 5;
-    context.shadowOffsetY = 5;
-    context.shadowBlur = 4;
-    context.shadowColor = "rgba(255,0,0,0,5)";
-    context.fillRect(10,10,50,50);
+                context.shadowOffsetY = 5;
+                context.shadowBlur = 4;
+                context.shadowColor = "rgba(255,0,0,0,5)";
+                context.fillRect(10,10,50,50);
 
-var gradient = context.createLinearGradient(30,30,70,70);
-gradient.addColorStop(0,"white");
-gradient.addColorStop(1,"black");
-context.fillStyle=gradient;
-context.fillRect(30,30,50,50);
+                var gradient = context.createLinearGradient(30,30,70,70);
+                gradient.addColorStop(0,"white");
+                gradient.addColorStop(1,"black");
+                context.fillStyle=gradient;
+                context.fillRect(30,30,50,50);
                 context.beginPath();
                 context.arc(100,100,99,0,2*Math.PI,false);
                 context.moveTo(194,100);
