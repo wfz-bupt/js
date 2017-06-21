@@ -60,7 +60,31 @@ ajax的每个过程都会产生错误
 任何错误处理策略中最重要的一部分，是确定错误是否致命，对于非致命错误，可以根据以下一个或者多个条件来确定，
 i）不影响用户的主要任务，i）只影响页面的一部分 i）可以恢复 i）重复相同错误可以消除错误
 17.2.7 把错误记录到服务器
+例子
+17.3 调试技术
+不建议使用alert
+17.3.1 将消息记录到控制台
+console对象有以下方法
+error
+info
+log
+warn
+17.3.2 将消息记录到当前页面
+在页面中开辟一小块区域，用以显示消息。在catch捕获的错误都应该打印出来
+17.3.3 抛出错误
+对于大型应用来说，用assert函数抛出错误，一个参数为求职结果应该为true的条件，另外一个条件为false要抛出的错误
+17.4 常见的IE错误
+17.4.2 无效字符
 
+17.4.3 未找到成员
+
+17.4.4 未知运行时错误
+当i）把块级元素插入到span元素内，也就是行内元素内时，抛出错误
+i）访问表格的任意部分，任意属性
+17.4.5 语法错误
+引用了外部的js文件，但是文件没有返回js代码，提示经常是 第一行第一个字符发生错误
+17.4.6 系统无法找到指定资源
+对url长度有限制 2048个字符
 */
 function process(values){
     if(!(values instanceof Array)){
@@ -73,5 +97,14 @@ function concat(str1,str2,str3){
     var result = str1 + str2;
     if(typeof str3 == "string"){ //使用if(str3)会很容易抛出错误
         result += str3;
+    }
+}
+function logError(sev, msg){
+    var img = new Image();
+    img.src = "login.php?sev=" + encodeURIComponent(sev) + "&msg=" + encodeURIComponent(msg);
+}
+function assert(condition, message){
+    if(!condition){
+        throw new Error(message);
     }
 }
