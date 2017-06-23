@@ -33,7 +33,7 @@ User-Agent: 浏览器的用户代理字符串
 然后才能放到URL的末尾。例子，向url末尾添加查询字符串参数。
 21.1.4 POST请求
 我们可以利用xhr来模仿表单提交，用到了14章讲到的serialize方法，例子
-21.2 XMLHttpRequest 2级
+21.2 XMLHttpRequest 2级   
 */
 //跨浏览器的xhr对象
 function createXHR(){
