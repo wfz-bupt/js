@@ -56,7 +56,9 @@ function object_test(){
 	数组。
 	slice(index1,index2),裁切[index1,index2)之间的数据并返回，如果index1和index2
 	为负数，则加上数组长度后，再计算。如果index1 < index2,则返回空数组。
-	splice(delePos,deleNum,inserNumList)
+	5.2.6 操作方法
+	splice(delePos,deleNum,inserNumList), 该方法始终返回一个数组，该数组中包含从原始数组中删除的项，如果没有
+	删除任何项，则返回空数组。
 	indexOf(arg1,arg2),从前向后查，第一参数为查找的项目，第二个参数为从哪里开始查找
 	lastIndexOf(arg1,arg2): 从后向前查.
 	＊＊以下函数为迭代方法，对数组中的每一项进行操作
@@ -191,6 +193,7 @@ function object_test(){
 	}
 	//regular_expression();
 	/*
+	5.5.5 函数属性和方法
 	*函数是对象，函数名是指针。既然函数是对象，那么它就有属性和方法，
 	函数对象有2个属性，length和prototype，length是函数希望接收的参数的个数。
 	函数对象有2个方法，call和apply方法,还有一个方法bind方法. 
@@ -205,6 +208,12 @@ function object_test(){
 	this指向函数的环境对象
 	函数对象还有个属性是caller，指向调用它的函数的引用
 	*/
+	function sum(num1, num2){
+		return num1 + num2;
+	}
+	function callSum(num1, num2){
+		return sum.call(this, num1, num2);
+	}
 	function function_test(){
 		//sum(1,2);
 		// function sum(num1,num2){

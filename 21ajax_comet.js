@@ -135,7 +135,13 @@ error:发生错误时触发
 close:关闭连接时触发
 websoket只支持dom0级事件
 21.5.6 SSE与Web Sockets
-
+组合使用SSE＋xhr可以实现双向通信
+21.6 安全
+/getuserinfo.php?id=23
+getuserinfo.php文件必须知道请求者是否真的有权限访问请求的数据，对于未被授权系统有权访问某个资源的情况，我们称之为
+CSRF，跨站点请求伪造。未被授权系统会伪装自己，让处理请求的服务器认为它是合法的。
+解决方法：验证发送请求者是否有权限访问相应的资源。
+21.7 小结
 */
 //跨浏览器的xhr对象
 function createXHR(){
