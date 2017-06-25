@@ -88,6 +88,53 @@ load和error事件，它能知道响应是什么时候接收到的。图像Ping�
 它只能发送get请求，并且无法接收服务器的响应文本。
 21.5.2 JSONP
 json with padding的简写（填充式json或者参数式json），JSONP是被包含在函数调用中的JSON。
+例如：callback({"name":"wfz"});
+JSONP例子
+两点不足：
+1.如果其他域不安全，没法办
+2.无法检测其是否失败
+21.5.3 Comet
+指的是一种更高级的ajax技术，是一种服务器向页面推送数据的技术。两种实现comet的方式
+长轮询和流
+概念：图p588
+流：http流，利用xhr对象实现http流的典型代码：
+21.5.4 服务器发送事件
+SSE（server－sent events）；SSE API用于创建到服务器的单向连接，服务器可以通过这个连接发送任意数量的数据。服务器
+响应的MIME类型必须是text/event-stream。
+1.SSE API
+要预定新的事件流，首先要创建一个新的EventSource对象，并传进一个入口点：
+var source = new EventSource("myevents.php");
+eventSource有一个readystate属性， 0表示正在连接到服务器，1表示打开了连接，2表示关闭了连接
+另外还有以下3个事件，open、message、error
+2.事件流
+一种机制可以确保浏览器以正确的顺序收到连接的数据段
+21.5.5 web sockets
+目标：在一个单独的持久连接上提供全双工、双向通信。使用标准的http服务器无法实现web socket，只有支持这种协议的专门
+服务器才能正常工作。
+未加密的连接不是：http://, 而是ws://, 加密的连接也不是https:// 而是wss：／／
+使用自定义协议的好处：能够在客户端和服务器端之间发送非常少量的数据，因此非常适合移动应用。目前支持web socket的浏览器
+：ff6+、safari5+、chrome
+1.web sockets api
+创建一个web socket，var socket = new WebSocket("ws://www.example.com/server.php")
+必须传入绝对url，同源策略对web socket不适用
+实例化web socket对象后，是创建连接，webSocket对象也有一个表示当前状态的readyState属性。
+WebSocket.OPENING: 正在建立连接
+OPEN：已经建立连接
+CLOSING：正在关闭连接
+CLOSE：已经关闭连接
+2.发送和接收数据
+socket.send("hello world");
+webSocket只能通过连接发送纯文本数据，对于复杂的数据结构，在连接发送之前必须进行序列化。JSON.stringify()
+当服务器端发来消息时，websocket就会触发message事件
+socket.onmessage = function(event){
+    var data = event.data;
+}
+3.其他事件
+open:成功建立连接时触发
+error:发生错误时触发
+close:关闭连接时触发
+websoket只支持dom0级事件
+21.5.6 SSE与Web Sockets
 
 */
 //跨浏览器的xhr对象
@@ -163,3 +210,11 @@ function createCORSRequest(){
     }
     return xhr;
 }
+// JSONP例子
+function handleResponse(response){
+    console.log(response.ip);
+}
+var script = document.createElement("script");
+script.src = "http://freegeoip.net/json/?callback=handleResponse";  
+//返回 handleResponse({"ip":"127.0.0.1"}),然后就直接执行我们事先写好的这个函数
+document.body.insertBefore(script, document.body.firstChild);
