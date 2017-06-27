@@ -103,7 +103,27 @@ var indexedDB = window.indexedDB || window.msIndexedDB || window.mozIndexDB || w
 最大的特点是使用对象保存数据，而不是表，一个indexedDB就是一组位于相同命名空间下的对象的集合。
 第一步：打开数据库。
 indexedDB.open方法，有则打开，无则创建并打开
-
+最好一开始就会数据库设置一个版本号
+2.对象存储空间
+假设要保存以下对象
+var user = {
+    username: "wfz",
+    age: 25
+}
+var store = db.createObjectStore("users", {keyPath: "username"})
+keyPath为存储空间的键
+利用store的add或者put方法向其中添加数据
+3.事务
+通过已知的键检索单个对象。
+var transaction = db.transaction("users", IDBTransaction.READ_WRITE);
+4.使用游标查询
+检索多个对象要用到
+var request = store.openCursor()
+5.键范围
+6.设定游标方向
+7.索引
+8.并发问题
+以上几节没看，一定会看，有时间看
 */
 // 一个简单的描述文件
 CACHE manifest
