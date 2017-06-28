@@ -187,3 +187,18 @@ function Ajax(type, url, data, success, failed){
     }
 }
 //jsonp
+
+function getViewport(){
+    if(document.compatMode == "BackCompat"){
+        return {
+            width: document.body.clientWith,
+            height: document.body.clientHeight
+        };
+    }else{
+        return {
+            width: document.documentElement.clientWith,
+            height: document.documentElement.clientHeight
+        }
+    }
+}
+
