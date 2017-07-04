@@ -94,7 +94,6 @@ workder.onerror = function(event){
 importScripts("files1.js", "files2.js")
 首先会执行1 ，再执行2
 */
-
 function updateProgress(){
     //变换dom
     mozRequestAnimationFrame(updateProgress);
