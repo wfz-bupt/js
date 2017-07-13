@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .wrap{
+    width: 600px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+   }
+   .middle{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all ease 700ms;
+   }
+   .middle>img{
+    width: 600px;
+    height: 400px;
+    float: left;
+   }
+   .last{
+    width: 50px;
+    height: 80px;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 40px;
+    text-align: center;
+    line-height: 80px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+    left: 10px;
+    z-index: 3;
+   }
+   .next{
+    width: 50px;
+    height: 80px;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 40px;
+    text-align: center;
+    line-height: 80px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    z-index: 3;
+   }
+   .btn{
+    width: 160px;
+    height: 20px;
+    position: absolute;
+    top: 350px;
+    left: 220px;
+    z-index: 3;
+    /*border: 1px solid red;*/
+   }
+   .btn>div{
+    width: 20px;
+    height: 20px;
+    border-radius:20px;
+    background-color: yellow;
+    float: left;
+    margin: 0 10px 0;
+   }
+
+    </style>
+ 
+</head>
+<body>
+    <div class="wrap">
+        <div class="last"><</div>
+        <div class="next">></div>
+        <div class="btn">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+     <div class="middle">
+        <img src="img/1.jpg" alt="" />
+        <img src="img/2.jpg" alt="" />
+        <img src="img/3.jpg" alt="" />
+
+        <img src="img/1.jpg" alt="" />
+        <img src="img/2.jpg" alt="" />
+        <img src="img/3.jpg" alt="" />
+        
+        <img src="img/1.jpg" alt="" />
+        <img src="img/2.jpg" alt="" />
+        <img src="img/3.jpg" alt="" />
+     </div>
+   </div>
+   <script type="text/javascript">
+  var wrap = document.querySelector(".wrap");
+  var middle = document.querySelector(".middle");
+  var imgs = document.querySelectorAll(".middle>img");
+  var next = document.querySelector(".next");
+  var last = document.querySelector(".last");
+  var btns =document.querySelectorAll(".btn>div");
+  //计算出一帧的距离
+  var w = imgs[0].offsetWidth*1;
+  var page = 0;
+  var btn = 0;
+  var timer = null;
+  //为初始图片的下标添加样式
+  btns[0].style.backgroundColor="red";
+  //计算出图集的宽度(长度)
+  middle.style.width = w*imgs.length+"px";
+  next.onclick = function(){
+   page++;
+   btn++;
+   // //无限滚判断
+   // if(page>imgs.length-1){
+   //  //忽略了开头第一页
+   //  page=1;
+   //  middle.style.left =0;
+   // }
+   //变换图片时,下边的按钮跟随变换
+   if(btn>imgs.length-2){
+    btn=0;
+   }
+   for(var i = 0; i <btns.length;i++){
+    btns[i].style.backgroundColor="";
+   }
+   btns[btn].style.backgroundColor="red";
+   //调用滚动动画
+   roll();
+   }
+  last.onclick = function(){
+   page--;
+   btn--;
+   //无限滚判断
+   // if(page<0){
+   //  //跳到最后一页
+   //  page=imgs.length-2;
+   //  middle.style.left =-w*(imgs.length-1)+"px";
+   // }
+   //变换图片时,下边的按钮跟随变换
+   if(btn<0){
+    btn=imgs.length-2;
+   }
+   for(var i = 0; i <btns.length;i++){
+    btns[i].style.backgroundColor="";
+   }
+   btns[btn].style.backgroundColor="red";
+   //调用滚动动画
+   roll();
+   }
+
+  function roll(){
+
+   //起点
+   var start = middle.offsetLeft;
+   //终点
+   var end = -w*page;
+   //变化量
+   var change = end - start;
+   //初始时间
+   var t  = 0;
+   //持续时间
+   var d = 50; 
+    middle.style.left =end+"px";
+
+  }
+ </script>
+</body>
+</html>
