@@ -202,3 +202,17 @@ function getViewport(){
     }
 }
 
+// 跨浏览器获取页面的滚动元素
+function getScrollElement () {
+  var scrollingElement = null
+  if (document.scrollingElement) {
+    scrollingElement = document.scrollingElement
+  } else {
+    // ie，如果是
+    if (document.compatMode === 'BackCompat') {
+      scrollingElement = document.body
+    } else {
+      scrollingElement = document.documentElement
+    }
+  }
+}
