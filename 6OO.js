@@ -24,7 +24,6 @@
 Object.getOwnPropertyDescriptor方法，取得给定属性的描述符
 *
 */
-
 function property_test(){
 	var person  = {};
 	Object.defineProperty(person,"name",{
