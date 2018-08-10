@@ -13,7 +13,48 @@ this是函数中的概念，分为
 10.字符串常用的方法
 11.js生成对象的几种方式
 
+12.嵌套数组的拍平
+13.用promise的其他方法，实现promise.all
 
+promise有哪些方法？？es6提供的，有哪些方法？？？
+用promise的构造函数将一些异步操作封装成一个promise。然后就可以用到promise
+提供的各种方法
+一个promise的状态：
+如果执行了resolve方法，则变成fufilled
+如果执行了reject方法，则变成rejected
+没有返回结果；pending
+new Promise((resovle, reject) => {
+  // 一些异步操作
+  // 成功方法
+  resolve(data)
+  // 错误方法
+  reject(data)
+})
+
+方法：
+Promise.all
+Promise.resolve
+Promise.reject
+Promise.prototype.catch()
+Promise.prototype.then()
+Promise.prototype.finally()
+
+Promise.all = function (promiseArr) {
+  return new Promise((resolve, reject) => {
+    var resArr = []
+    var len = promiseArr.length
+    promiseArr.map((item, index) => {
+      Promise.resolve(item).then((data) => {
+        resArr.push(data)
+        if (index == len - 1) {
+          resolve(resArr)
+        }
+      }, (err) => {
+        reject(err)
+      })
+    })
+  })
+}
 
 
 
