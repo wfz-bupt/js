@@ -111,4 +111,25 @@ var rob = function(nums) {
 1.实现一个音乐播放器。仿照qq音乐。
 2.用递归和非递归的方式求计算二叉树的深度
 3.用setTimeout实现setInterval
+4.拍平一个深层嵌套的数组
+5.实现bind
 
+function flat (arr) {
+  var res = []
+  arr.forEach(item => {
+    if (Array.isArray(item)) {
+      res.push(...flat(item))
+    } else {
+      res.push(item)
+    }
+  })
+  return res
+}
+
+call apply bind
+这仨函数，如果一个对象没有某个方法，需要借用别人的方法，这个时候可以用这仨方法之一。
+借用别人的方法：经典使用案例？？
+实现bind方法 
+Function.prototype.bind = function (args) {
+  
+}

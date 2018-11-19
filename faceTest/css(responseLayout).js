@@ -23,6 +23,10 @@ i）transform: translate
 i）margin: 负数
 
 flex布局
+justify-content: 设置主轴方向上弹性盒子的排列方式，例如： space-between、space-around
+align-content: 设置侧轴方向上弹性盒子的排列方式，对单行盒子无效
+align-items: 
+区别是什么？
 
 margin折叠的所有情况：
 http://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html
