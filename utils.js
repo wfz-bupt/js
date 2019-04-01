@@ -217,3 +217,55 @@ function getScrollElement () {
   }
 }
 
+
+//跨浏览器获得元素距离页面最左边的距离
+function getElementLeft (element){
+    var actualLeft = element.offsetLeft
+    var current = element.offsetParent
+    while(current !== null){
+        actualLeft += current.offsetLeft
+        current = current.offsetParent
+    }
+    return actualLeft
+}
+
+//跨浏览器获得元素距离页面最上边的距离
+function getElementTop (element){
+    var actualTop = element.offsetTop
+    var current = element.offsetParent
+    while(current !== null){
+        actualTop += current.offsetTop
+        current = current.offsetParent
+    }
+    return actualTop
+}
+
+function isUndef (v) {
+  return v === undefined || v === null
+}
+
+function isDef (v) {
+  return v !== undefined && v !== null
+}
+
+function isTrue (v) {
+  return v === true
+}
+
+function isFalse (v) {
+  return v === false
+}
+
+function isObject (v) {
+  return typeof v === 'object' && v !== null
+}
+
+/**
+ * Get the raw type string of a value, e.g., [object Object].
+ */
+function toRawType (v) {
+  var _toString = Object.prototype.toString()
+  return _toString.call(v).slice(8, -1)
+}
+
+

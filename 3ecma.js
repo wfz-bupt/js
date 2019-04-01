@@ -5,7 +5,14 @@ function one_test(){
 	s=false; // 0    -s: 0
 }
 /*
-js简单数据类型（基本数据类型）：undefined null boolean number string 
+js简单数据类型（基本数据类型）：undefined null boolean number string
+typeof 返回值
+typeof number number
+typeof string string
+typeof null object
+typeof undefined undefined
+typeof boolean boolean
+typeof symbol function
 复杂数据类型（引用类型）：object
 还有3种基本包装类型（Boolean、number、string）
 基本类型没有属性和方法
@@ -17,6 +24,8 @@ js数值转换函数：Number、parseInt、parseFloat。
 Number函数参数可以是任意类型的数据，而后两个函数参数必须是 字符串。
 
 对象的valueOf和toString方法什么作用？
+Object.prototype.toString.call()返回对象类型：Object、Function、Array、String、Boolean、Number、Date、RegExp、Error
+EvalError、RangeError、ReferenceError、SyntaxError、TypeError、URIError
 parseInt函数：
 1.解析时，从第一个字符开始解析，直到解析到最后一个字符串，或者解析到一个非数字的字符。
 2.第二个参数为指定的解析的进制数，最佳实践：无论什么时候都要指定第二个参数。一般为10
@@ -39,6 +48,12 @@ number、boolean、对象、string有这个方法，但是null和undefined没有
 2.String函数
 参数可以为任意类型的数据。number、boolean、对象、string直接调用toString方法，
 null和undefined分别返回 'null' 'undefined'
+3.string的方法
+substring、concat、slice、indexOf、includes、split、substr
+substring和slice比较
+1.如果a和b都在索引范围内且a < b，则：两者返回一致
+2.如果a和b任意一个不在索引范围内，则：substring会将 < 0 看作0，大于长度值的，看作长度值 - 1。而slice会将
+3.如果a大于b，则：substring会将a和b调换位置，而slice会返回空
 */
 function toString(){
 	var num = 10;

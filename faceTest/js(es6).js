@@ -56,7 +56,10 @@ Promise.all = function (promiseArr) {
   })
 }
 
-
+// promise封装异步请求 使用
+request.get('./conan-weixin/get').then(res => {
+  console.log(res)
+})
 
 
 
