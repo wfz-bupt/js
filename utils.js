@@ -268,4 +268,70 @@ function toRawType (v) {
   return _toString.call(v).slice(8, -1)
 }
 
+/**
+ * Remove an item from an array.
+ */
+function removeItem (arr, item) {
+    var index = arr.indexOf(item)
+    if (index !== -1) {
+        return arr.splice(index, 1)
+    }
+}
 
+/**
+ * Check whether an object has the property.
+ */
+function hasOwn (obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key)
+}
+
+/**
+ * Create a cached version of a pure function.
+ */
+function cached (fn) {
+  var cache = Object.create(null);
+  return (function cachedFn (str) {
+    var hit = cache[str];
+    return hit || (cache[str] = fn(str))
+  })
+}
+
+/**
+ * 只调用一次的函数
+ */
+function once (fn) {
+    var called = false
+    return function () {
+        if (!called) {
+            called = true
+            fn.apply(this, arguments)
+        }
+    }
+}
+once(add)(4, 5)
+
+/**
+ * 为某个对象定义一个属性
+ */
+function def (obj, key, value) {
+    Object.defineProperty(obj, key {
+        value: value,
+        writable: true,
+        enumberable: true,
+        configurable: true
+    })
+}
+
+// Browser environment sniffing
+  var inBrowser = typeof window !== 'undefined';
+  var inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;
+  var weexPlatform = inWeex && WXEnvironment.platform.toLowerCase();
+  var UA = inBrowser && window.navigator.userAgent.toLowerCase();
+  var isIE = UA && /msie|trident/.test(UA);
+  var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
+  var isEdge = UA && UA.indexOf('edge/') > 0;
+  var isAndroid = (UA && UA.indexOf('android') > 0) || (weexPlatform === 'android');
+  var isIOS = (UA && /iphone|ipad|ipod|ios/.test(UA)) || (weexPlatform === 'ios');
+  var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
+  var isPhantomJS = UA && /phantomjs/.test(UA);
+  var isFF = UA && UA.match(/firefox\/(\d+)/);

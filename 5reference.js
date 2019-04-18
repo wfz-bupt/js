@@ -37,6 +37,9 @@ function object_test(){
 }
 	/*
 	* 5.2 Array类型
+	直接在原数组中操作的方法有：
+	pop push shift unshift sort reverse splice
+
 	toString方法
 	toLocalString方法
 	valueOf方法

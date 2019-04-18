@@ -1,37 +1,25 @@
-<html style="height: 100%; overflow: hidden;">
-    <head>
-        
-    </head>
-    <body style="height:100%; overflow: hidden;">
-    <div id="test" style="height: 20px; width: 10px; overflow:scroll;">
-            ddddddd</br>
-            ddddddd</br>
-            ddddddd</br>
-            ddddddd</br>
-            ddddddd</br>
-            ddddddd</br>
-        </div>
-        <div class="container">
-        <div style="height: 720px; background-color: red;"></div>
-        <div style="height: 720px; background-color: white;"></div>
-        <div style="height: 720px; background-color: blue;"></div>
-        <div style="height: 720px; background-color: orange;"></div>
-        <div style="height: 720px; background-color: pink;"></div>
-        
-        
-        <script type="text/javascript">
-            // var current = 1;
-            // var timer = null;
-            // document.body.addEventListener("mousewheel", function(event){
-            //     if(timer){
-            //         return false;
-            //     }
-            //     current++;
-            //     document.querySelector(".container").style.cssText = "transform: translate3d(0,"+ (-720 * current) +"px,0); ";
-            //     timer = setTimeout(function(){
-            //         timer = null;
-            //     },700);
-            // },false);
-        </script>
-    </body>
+<html>
+  <head>
+    <link rel="stylesheet" href="./xxx.css"></link>
+  </head>
+  <body>
+    <div class="list-wrap"></div>
+    <script type="text/javascript">
+      function once (fn) {
+        var called = false;
+        console.log('once')
+        return function () {
+          if (!called) {
+            called = true;
+            console.log(arguments)
+            fn.apply(this, arguments);
+          }
+        }
+      }
+      function add (a, b) {
+        return a + b
+      }
+      once(add)(3, 4)
+    </script>
+  </body>
 </html>

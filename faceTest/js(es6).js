@@ -63,3 +63,25 @@ request.get('./conan-weixin/get').then(res => {
 
 
 
+
+
+/*
+ * 常用js方法
+ */
+// Object的方法
+
+// Object.keys获取object的所有属性数组
+var a = { name: 'wfz', age: 45 }
+Object.keys(a) // 
+// Object.hasOwnProperty 自己的属性，不是从原型那继承来的属性
+a.hasOwnProperty('name')
+// Object.defineProperty 定义对象的某个属性
+Object.defineProperty(a, 'sex', {
+  value: 'female',
+  writable: true,
+  enumberable: true,
+  configurable: true
+})
+// Object.assign 复制一个对象到另一个对象
+Object.assign({}, a)
+
