@@ -1,18 +1,23 @@
 一、es6新特性
 二、常用js类的定义方法有哪些？
 构造函数和原型
+每一个对象都有一个__proto__的私有属性，指向原型对象。
+每一个对象都有一个contructor的属性，指向构造函数。
+每一个函数都有一个prototype的属性，指向原型对象。
+所以，如果a是一个对象，那么 a.__proto__ = a.constructor.prototype
 三、js类继承的方法
 四、js是函数作用域为基本作用域
 五、js里this指的什么
-this是函数中的概念，分为
-普通函数调用、对象的函数调用、构造函数调用、bind／apply／call对this的影响、箭头函数
+this是函数中的概念，它的指向由这个函数怎么样被调用来决定。而且它的值是在运行时才能知道具体的指向。指向当前代码
+正在执行的上下文
+分为普通函数调用、对象的函数调用、构造函数调用、bind／apply／call对this的影响、箭头函数
 6.apply、bind、call的区别
 7.什么是闭包？闭包有哪些用处？平时什么情况下会用到？
 8.js常用设计模式的设计思路
 9.数组常用的方法
 10.字符串常用的方法
 11.js生成对象的几种方式
-
+// i) new Object() ii) 对象字面量 iii) 构造函数 new iv）class
 12.嵌套数组的拍平
 13.用promise的其他方法，实现promise.all
 
@@ -62,9 +67,6 @@ request.get('./conan-weixin/get').then(res => {
 })
 
 
-
-
-
 /*
  * 常用js方法
  */
@@ -85,3 +87,4 @@ Object.defineProperty(a, 'sex', {
 // Object.assign 复制一个对象到另一个对象
 Object.assign({}, a)
 
+// 创建类的方式，2种，构造函数和class。class是构造函数的语法糖

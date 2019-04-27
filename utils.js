@@ -187,6 +187,43 @@ function Ajax(type, url, data, success, failed){
     }
 }
 //jsonp
+export function jsonp (opt) {
+  return new Promise((resolve, reject) => {
+    opt.data = opt.data || {}
+    opt.data.callback = opt.data.callback || ('jsonpcallback_' + (new Date()).valueOf())
+
+    let params = (() => {
+      let ps = []
+      for (let key in opt.data) {
+        ps.push(`${key}=${opt.data[key]}`)
+      }
+      return ps.join('&')
+    })()
+    opt.url += (opt.url.indexOf('?') === -1) ? '?' : '&'
+    opt.url += params
+ 
+    let script = document.createElement('script')
+    script.src = opt.url
+    script.async = true
+    script.type = 'text/javascript'
+
+    window[opt.data.callback] = function (data) {
+      window[opt.data.callback] = null
+      delete window[opt.data.callback]
+      document.body.removeChild(script)
+      script = null 
+
+      if (typeof (data) !== 'object') {
+        return reject(new Error('格式错误，非标准 json'))
+      }
+      resolve(data)
+    }
+    script.addEventListener('error', () => {
+      reject(new Error('网络错误.'))
+    })
+    document.body.appendChild(script)
+  })
+}
 
 function getViewport(){
     if(document.compatMode == "BackCompat"){
