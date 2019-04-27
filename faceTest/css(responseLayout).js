@@ -23,11 +23,20 @@ i）transform: translate
 i）margin: 负数
 
 flex布局
-justify-content: 设置主轴方向上弹性盒子的排列方式，例如： space-between、space-around
-align-content: 设置侧轴方向上弹性盒子的排列方式，对单行盒子无效
-align-items: 
-区别是什么？
 
+1.justify-content
+属性定义了浏览器如何分配顺着父容器主轴的弹性元素之间及其周围的空间。沿着父容器的主轴，怎么分配各个弹性元素。
+肯定是适用于flex的单个盒子啊，就是flex布局里面的盒子。那设置之后，是水平或者垂直居中（如果排列方式是按行排列，则是水平居中，
+如果排列方式是按列排列，则是垂直居中，下同），那不管子盒子里是文字还是盒子，都会水平或者垂直居中吗？
+答案是会的，只要父容器设置了display：flex，那么父容器内的子元素就都是弹性盒子。弹性盒子会水平居中显示。
+取值有：start、end center flex-start flex-end left  right space-between space-around space-evenly
+2.align-content
+align-content 属性定义了当作为一个弹性盒子容器的属性时，浏览器如何在容器的侧轴围绕弹性盒子项目分配空间。沿着父容器的
+侧轴，如何分配各个弹性元素。
+取值跟justify-content的相同
+
+3.align-items
+沿着父容器的侧轴，如何分配一整行的弹性元素。
 margin折叠的所有情况：
 http://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html
 margin折叠的前提条件：
