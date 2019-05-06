@@ -113,6 +113,8 @@ var rob = function(nums) {
 3.用setTimeout实现setInterval
 4.拍平一个深层嵌套的数组
 5.实现bind
+6.给定promise数组，实现promise.all
+7.event loop 讲一下事件循环
 
 function flat (arr) {
   var res = []

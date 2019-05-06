@@ -11,8 +11,19 @@
 this是函数中的概念，它的指向由这个函数怎么样被调用来决定。而且它的值是在运行时才能知道具体的指向。指向当前代码
 正在执行的上下文
 分为普通函数调用、对象的函数调用、构造函数调用、bind／apply／call对this的影响、箭头函数
+1.es6新特性
+2.常用js类的定义方法有哪些？
+
+3.构造函数和原型
+3.js类继承的方法
+4.js是函数作用域为基本作用域
+5.js里this指的什么
+5.闭包
+5.es5实现class
+5.es5实现new
 6.apply、bind、call的区别
 7.什么是闭包？闭包有哪些用处？平时什么情况下会用到？
+
 8.js常用设计模式的设计思路
 9.数组常用的方法
 10.字符串常用的方法
@@ -20,9 +31,14 @@ this是函数中的概念，它的指向由这个函数怎么样被调用来决�
 // i) new Object() ii) 对象字面量 iii) 构造函数 new iv）class
 12.嵌套数组的拍平
 13.用promise的其他方法，实现promise.all
+14.怎样获取document.body里有几个标签
+15.怎样获得元素的方法
+16.怎样获取对象有哪些方法？
+17.throttle和debounce实现，区别、第一次一定生效
+Object.getOwnPropertyNames(Object.__proto__)
 
-promise有哪些方法？？es6提供的，有哪些方法？？？
-用promise的构造函数将一些异步操作封装成一个promise。然后就可以用到promise
+18.promise有哪些方法？？es6提供的，有哪些方法？？？
+18.用promise的构造函数将一些异步操作封装成一个promise。然后就可以用到promise
 提供的各种方法
 一个promise的状态：
 如果执行了resolve方法，则变成fufilled

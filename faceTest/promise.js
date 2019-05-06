@@ -19,3 +19,5 @@ function ajax () {
     }
   })
 }
+
+// 给定一个promise数组，实现promise.all

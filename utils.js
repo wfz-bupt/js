@@ -372,3 +372,62 @@ function def (obj, key, value) {
   var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
   var isPhantomJS = UA && /phantomjs/.test(UA);
   var isFF = UA && UA.match(/firefox\/(\d+)/);
+
+var repeat = function (str, n) {
+  var res = '';
+  while (n) {
+    if (n % 2 === 1) { res += str; }
+    if (n > 1) { str += str; }
+    n >>= 1;
+  }
+  return res
+};
+
+/*
+ * 一般情况下，debounce比throttle的应用场景多，能用throttle的都能用debounce
+ * throttle: 一段时间之内肯定会执行一次
+ * debounce: 一段时间之后（比如：鼠标滑动停止之后或者手指滑动停止之后）才会执行一次
+ */
+const debounce = (func, delay) => {
+  let inDebounce
+  return function() {
+    const context = this
+    const args = arguments
+    clearTimeout(inDebounce)
+    inDebounce = setTimeout(() => func.apply(context, args), delay)
+  }
+}
+// 
+const throttle = (func, limit) => {
+  let inThrottle
+  return function() {
+    const args = arguments
+    const context = this
+    if (!inThrottle) {
+      func.apply(context, args)
+      inThrottle = true
+      setTimeout(() => inThrottle = false, limit)
+    }
+  }
+}
+// 最后一次会执行的throttle
+const throttle = (func, limit) => {
+  let lastFunc
+  let lastRan
+  return function() {
+    const context = this
+    const args = arguments
+    if (!lastRan) {
+      func.apply(context, args)
+      lastRan = Date.now()
+    } else {
+      clearTimeout(lastFunc)
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args)
+          lastRan = Date.now()
+        }
+      }, limit - (Date.now() - lastRan))
+    }
+  }
+}
