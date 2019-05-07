@@ -39,6 +39,49 @@ Object.getOwnPropertyNames(Object.__proto__)
 
 18.promise有哪些方法？？es6提供的，有哪些方法？？？
 18.用promise的构造函数将一些异步操作封装成一个promise。然后就可以用到promise
+19.输出什么(融360)
+console.log(1)
+setTimeout(() => { console.log(2) }, 0)
+console.log(3)
+new Promise((resolve, reject) => {
+  resolve()
+}).then(() => {
+  console.log(4)
+})
+20.vue watch的用法
+21.目前正在读的技术书
+22.输出什么（融360）
+a = 2
+function fn(a) {
+  alert(a)
+  a = 1 // 相当于对参数赋值，跟外面的a没关系
+  alert(a)
+}
+fn()
+alert(a)
+// 参数相当于函数里的变量，相当于：var a。
+23.用正则表达式实现trim方法，正则表达式一定要记牢
+24.类的成员的存储问题，基本数据类型、引用类型和原型，举例
+function A (name) {
+  // this.name = name
+  // this.list = [1, 2]
+  // this.sayName = function () {
+  //   console.log(this.name)
+  // }
+}
+A.prototype.sayName = function () {
+  console.log(this.name)
+}
+A.prototype.name = 'a'
+A.prototype.list = [1, 2]
+var a1 = new A('a')
+var a2 = new A('a')
+console.log(a1.sayName === a2.sayName) //console
+console.log(a1.name === a2.name)
+a1.name = 'b'
+console.log(a1.name === a2.name)
+a1.list.push(3)
+console.log(a1.list === a2.list)
 提供的各种方法
 一个promise的状态：
 如果执行了resolve方法，则变成fufilled
