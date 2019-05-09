@@ -78,10 +78,13 @@ var a1 = new A('a')
 var a2 = new A('a')
 console.log(a1.sayName === a2.sayName) //console
 console.log(a1.name === a2.name)
-a1.name = 'b'
+a1.name = 'b' // 赋值的操作：没有查询的步骤，直接在对象上新增一个属性，而不是在prototype上新增。
+// 但是查找的时候，会遵循：对象上查询--如果没有则在prototype上查询
 console.log(a1.name === a2.name)
 a1.list.push(3)
 console.log(a1.list === a2.list)
+25.如何知道动画已经结束了？seTimeout(() => {}, 1000)? 其实有一个事件可以监听动画是否结束
+
 提供的各种方法
 一个promise的状态：
 如果执行了resolve方法，则变成fufilled
