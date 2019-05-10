@@ -35,3 +35,8 @@ store.dispatch('ddd')
 beforeCreate-->created-->beforeMounted-->beforeMounte-->mounted-->beforeDestory-->destroyed
 5.路由的原理
 6.猿题库：小程序唤起的弹窗是原生的吗？你觉得是用什么实现的？
+7.说出vue的指令
+8.<keep-alive></keep-alive>的作用
+9.vue生命周期钩子函数
+10.vue的全局函数
+// Vue.use  Vue.extend  Vue.component  Vue.directive  

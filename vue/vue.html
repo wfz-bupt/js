@@ -5,11 +5,30 @@
   </head>
   <body>
     <div id="app">
-      dddd \u00B7
+      <div @click="changeName">换名字</div>{{name}}
+      <div>{{message}}</div>
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript">
-      const app = 5
+      // 1.内置组件的用法
+      // 2.全局api的使用
+      new Vue({
+        el: '#app',
+        data: {
+          name: 'wfz',
+          message: ''
+        },
+        watch: {
+          name (newValue, oldValue) {
+            this.message = '原来的名字是' + oldValue
+          }
+        },
+        methods: {
+          changeName () {
+            this.name = 'thy'
+          }
+        }
+      })
     </script>
   </body>
 </html>
