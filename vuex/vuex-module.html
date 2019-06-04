@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vuex</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/javascript">
+    const moduleA = {
+      state: {
+        name: 'wfz'
+      },
+      getters: {
+        printedHerName(state) {
+          return '她的名字是' + state.name
+        }
+      },
+      mutations: {
+        changeName({ state, commit }, payLoad) {
+          state.name = payLoad.name
+        }
+      },
+      actions: {
+        changeName({ state, commit }, payLoad) {
+          setTimeout(() => {
+            commit('changeName', payLoad)
+          }, 1000)
+        }
+      }
+    }
+    const moduleB = {
+      state: {
+        name: 'thy'
+      },
+      getters: {
+        printedHisName(state) {
+          return '他的名字是' + state.name
+        }
+      }
+    }
+    const store = new Vuex.Store({
+      modules: {
+        moduleA: moduleA,
+        moduleB: moduleB
+      }
+    })
+    const app = new Vue({
+      el: '#app',
+      template: '<div><div>{{printedHerName}}</div><div>{{printedHisName}}</div></div>',
+      store,
+      computed: {
+        ...Vuex.mapGetters(['printedHerName', 'printedHisName'])
+        // printedName () {
+        //   return this.$store.getters.printedName
+        // }
+      }
+    })
+  </script>
+</body>
+</html>

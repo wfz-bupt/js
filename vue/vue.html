@@ -5,62 +5,84 @@
   </head>
   <body>
     <div id="app">
-      <div @click="changeName">换名字</div>{{name}}
+      <!-- <div @click="changeName">换名字</div>{{name}}
       <div>{{message | captalize}}</div>
       <input v-trim="type"/>
-      <wfz></wfz>
+      <wfz></wfz> -->
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript">
       // 1.内置组件的用法
       // 2.全局api的使用
-      Vue.component('wfz', Vue.extend({
-        // template: '<div>wfz</div>',
+      // Vue.component('wfz', Vue.extend({
+      //   // template: '<div>wfz</div>',
+      //   render: function (createElement) {
+      //     return createElement('div', this.name)
+      //   },
+      //   data: function () {
+      //     return {
+      //       name: 'wfz'
+      //     }
+      //   }
+      // }))
+      // let wfz = Vue.component('wfz')
+      // Vue.directive('trim', {
+      //   bind: function (el, binding) {
+      //     console.log(binding)
+      //     el.addEventListener(binding.value, function () {
+      //       el.value = el.value.trim()
+      //     }, false)
+      //   }
+      // })
+      // Vue.filter('captalize', function (value) {
+      //   return value.toUpperCase()
+      // })
+      // let app = new Vue({
+      //   el: '#app',
+      //   // template: '<div><div>{{name}}</div><wfz></wfz></div>',
+      //   data: {
+      //     name: 'wgg',
+      //     message: '',
+      //     info: { name: 'dd' },
+      //     type: 'blur'
+      //   },
+      //   // components: { wfz },
+      //   watch: {
+      //     name (newValue, oldValue) {
+      //       this.message = '原来的名字是' + oldValue
+      //     }
+      //   },
+      //   methods: {
+      //     changeName () {
+      //       this.name = 'thy'
+      //     }
+      //   }
+      // })
+      // // app.name = 'thy'
+      // Vue.set(app.info, 'age', 45)
+      // console.log(Vue.version)
+
+      // 渲染函数
+      Vue.component('anchored-heading', {
         render: function (createElement) {
-          return createElement('div', this.name)
+          return createElement(
+            'h' + this.level,   // 标签名称
+            this.$slots.default // 子节点数组
+          )
         },
-        data: function () {
-          return {
-            name: 'wfz'
+        props: {
+          level: {
+            type: Number,
+            required: true
           }
         }
-      }))
-      let wfz = Vue.component('wfz')
-      Vue.directive('trim', {
-        bind: function (el, binding) {
-          console.log(binding)
-          el.addEventListener(binding.value, function () {
-            el.value = el.value.trim()
-          }, false)
-        }
       })
-      Vue.filter('captalize', function (value) {
-        return value.toUpperCase()
-      })
-      let app = new Vue({
+      const anchoredHeading = Vue.component('anchored-heading')
+      new Vue({
+        template: '<anchored-heading :level="1">Hello world!</anchored-heading>',
         el: '#app',
-        // template: '<div><div>{{name}}</div><wfz></wfz></div>',
-        data: {
-          name: 'wgg',
-          message: '',
-          info: { name: 'dd' },
-          type: 'blur'
-        },
-        // components: { wfz },
-        watch: {
-          name (newValue, oldValue) {
-            this.message = '原来的名字是' + oldValue
-          }
-        },
-        methods: {
-          changeName () {
-            this.name = 'thy'
-          }
-        }
+        component: { anchoredHeading }
       })
-      // app.name = 'thy'
-      Vue.set(app.info, 'age', 45)
-      console.log(Vue.version)
     </script>
   </body>
 </html>

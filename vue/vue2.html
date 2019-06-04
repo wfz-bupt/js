@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue.plugin</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/javascript">
+    let myPlugin = {}
+    myPlugin.install = function (Vue, options) {
+      // 添加实例方法
+      Vue.prototype.$globalMethod = function (name) {
+        console.log('name is', name)
+      }
+      // 添加全局资源
+      Vue.directive('trim', {
+        // binding: name, value, oldValue
+        bind: function (el, binding, vNode, oldVnode) {
+          el.addEventListener('blur', () => {
+            el.value = el.value.trim()
+            console.log(el.value)
+          }, false)
+        }
+      })
+    }
+    Vue.use(myPlugin)
+    new Vue({
+      el: '#app',
+      template: '<div>ddd<input v-trim /></div>',
+      mounted () {
+        this.$globalMethod()
+        // this.globalMethod('ddd')
+      }
+    })
+  </script>
+</body>
+</html>

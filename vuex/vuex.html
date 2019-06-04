@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vuex</title>
+  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./sonComp.js"></script>
+  <script type="module" src="./pComp.js"></script>
+  <script type="text/javascript">
+    // 知识点1：state、getters、mutations和actions的写法
+    /*
+     * state: {},
+       getters: { name(state) { return state.info.name } }
+       mutations: { increment (state) { state.info.age++ } }
+       actions: { incrementAsync (context) { context.commit('increment') }}
+     */
+    // 知识点2: state getters mutations actions在组件中的用法
+    /*
+      this.$store.state
+      this.$store.getters.info.age
+      this.$store.commit('increment')
+      this.$store.dispatch('incrementAsync')
+     */
+    const home = {
+      template: '<div>\
+                  <div @click="onClick">加1</div>\
+                  <div>home{{count}}</div>\
+                  <div>{{$store.getters.ageDesc}}</div>\
+                  <div>ex2: {{ageDesc}}</div>\
+                </div>\
+                ',
+      computed: {
+        ...Vuex.mapState(['count']),
+        // count () {
+        //   return this.$store.state.count
+        // }
+        ...Vuex.mapGetters(['ageDesc']),
+        // ageDesc () {
+        //   return this.$store.getters.ageDesc
+        // }
+      },
+      components: {
+      },
+      methods: {
+        ...Vuex.mapMutations(['increment']),
+        onClick () {
+          // this.increment({ amount: 5 })
+          this.$store.commit('increment', { amount: 5 })
+        }
+      },
+      mounted () {
+        this.$store.dispatch('incrementAsync', { amount: 100 })
+      }
+    }
+    const partA = {
+      template: '<div>partA</div>'
+    }
+    const router = new VueRouter({
+      routes: [{
+        path: '/',
+        component: home
+      }, {
+        path: '/partA',
+        component: partA
+      }]
+    })
+    const store = new Vuex.Store({
+      state: {
+        count: 0,
+        info: {
+          name: 'wfz',
+          age: 45
+        }
+      },
+      getters: {
+        ageDesc: (state) => {
+          console.log(state)
+          return '年龄' + state.info.age
+        }
+      },
+      mutations: {
+        increment (state, payLoad) {
+          state.count+= payLoad.amount
+        }
+      },
+      actions: {
+        incrementAsync (context, payLoad) {
+          setTimeout(() => {
+            console.log('dd')
+            context.commit('increment', payLoad)
+          }, 1000)
+        }
+      }
+    })
+    new Vue({
+      el: '#app',
+      router,
+      store,
+      template: '<router-view></router-view>'
+    })
+  </script>
+</body>
+</html>

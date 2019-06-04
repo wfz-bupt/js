@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test1</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script type="text/tpl" id="template1">
+    <div>
+      <div @click="showr(0)">clickA</div>
+      <div @click="showr(1)">clickB</div>
+      <div @click="showr(2)">clickC</div>
+
+      <div v-if="show[0]">A</div>
+      <div v-if="show[1]">B</div>
+      <div v-if="show[2]">C</div>
+    </div>
+  </script>
+  <style>
+    .box {
+      display: flex;
+    }
+    .item {
+      width: 200px;
+      height: 100px;
+      border: 1px solid red;
+      justify-content: center;
+      align-items: center;
+    }
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/javascript">
+    // 知识点：1.vue提供的内置组件：component  transition  keep-alive
+    Vue.component('componentA', {
+      template: document.getElementById('template1').innerHTML,
+      data () {
+        return {
+          show: [true, false, false]
+        }
+      },
+      methods: {
+        showr (index) {
+          this.show.splice(index, 1, true)
+        }
+      }
+    });
+    Vue.component('componentB', {
+      template: '<div>componentB</div>'
+    });
+    Vue.component('componentC', {
+      template: '<div>componentC</div>'
+    });
+    const componentA = Vue.component('componentA')
+    const componentB = Vue.component('componentB')
+    const componentC = Vue.component('componentC')
+    new Vue({
+      el: '#app',
+      template: '<div>\
+                    <div class="box" @click="change">\
+                      <div class="itemA item">1</div>\
+                      <div class="itemB item">2</div>\
+                      <div class="itemC item">3</div>\
+                    </div>\
+                   <transition name="fade" mode="out-in"><keep-alive>\
+                    <component :is="componentName"></component></keep-alive>\
+                   </transition>\
+                  </div>\
+                ',
+      component: {
+        componentA,
+        componentB,
+        componentC
+      },
+      data () {
+        return {
+          componentName: ''
+        }
+      },
+      methods: {
+        change (event) {
+          const index = event.target.className.split(' ')[0][4]
+          this.componentName = 'component' + index
+        }
+      }
+    })
+  </script>
+</body>
+</html>
