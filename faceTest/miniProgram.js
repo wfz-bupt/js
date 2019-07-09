@@ -60,3 +60,6 @@ wx.chooseAddress
 /**
 <button open-type="getPhoneNumber or getUserInfo" bindgetphonenumber="" bindgetuserinfo=""></button>
 **/
+
+小程序原理-底层
+https://segmentfault.com/a/1190000019131399
