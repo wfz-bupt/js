@@ -11,3 +11,4 @@ git revert commitId
 3.git cherry-pick commitId
 复制commitId所在的改动到当前分支，并生成一次新的commit
 
+在校园内部署WiFi探针来采集智能终端的WiFi请求信号,对数据进行分析、挖掘,得到校园人员分布、流动情况及学生活动情况,绘制相关的数据分析图表,并研发 Web 展示平台,实现数字校园的实时展示。
