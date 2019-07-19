@@ -37,6 +37,49 @@ function object_test(){
 }
 	/*
 	* 5.2 Array类型
+	所有的方法：
+	from/isArray/of/concat/copyWithin/entries/every/fill/filter/find/findIndex/flat/flatMap/forEach
+	/includes/indexOf/join/keys/lastIndexOf/map/pop/push/reduce/reduceRight/reverse/shift/slice/
+	some/sort/splice/toLocaleString/toString/unshift/values
+
+	Array.from(arrayLike[, mapFn[, thisArg]])
+	Array.isArray(obj)
+	Array.of(element0[, element1[, ...[, elementN]]])
+	old_array.concat(value1[, value2[, ...[, valueN]]])
+	array.copyWithin(target[, start[, end]])
+	array.entries()
+	arr.every(callback[, thisArg])
+	arr.fill(value[, start[, end]])
+	arr.filter(callback(element[, index[, arr]])[, thisArg])
+	arr.find(callback(element[, index[, arr]])[, thisArg])
+	arr.findIndex(callback[, thisArg])
+	arr.flat(depth)
+	arr.flatMap(callback[,thisArg])
+	arr.forEach(callback[,thisArg])
+	arr.includes(valueToFind[, fromIndex])
+	arr.indexOf(searchElement)
+	arr.join([seperator])
+	arr.keys()
+	arr.lastIndexOf(searchElement[, fromIndex = arr.length - 1]
+	var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+ 	// Return element for new_array 
+	}[, thisArg]))
+	arr.pop()
+	arr.push(element1, ..., elementN)
+	arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue])
+	arr.reduceRight(callback[, initialValue])
+	arr.reverse()
+	arr.shift()
+	arr.slice([begin[, end]])
+	arr.some(callback(element[, index[, array]])[, thisArg])
+	arr.sort([compareFunction])
+	array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+	arr.toString()
+	arr.unshift(element1, ..., elementN)
+	arr.values()
+
+	
+
 	直接在原数组中操作的方法有：
 	pop push shift unshift sort reverse splice
 
@@ -297,6 +340,42 @@ function object_test(){
 		localeCompare方法：如果字符串在字母表中应该排在字符串参数之前，则返回一个
 		负数，反之则返回正数
 		fromCharCode：参数为字符编码，转换为字符串
+
+		string的所有方法
+		fromCharCode/fromCodePoint/charAt/charCodeAt/codePointAt/concat/endsWith/includes/indexOf/lastIndexOf/localeCompare
+		match/matchAll/normalize/padEnd/padStart/repeat/replace/search/slice/split/startsWith/substring/toLowerCase/toString
+		toUpperCase/trim/valueOf
+
+		String.fromCharCode(num1, ..., numN)
+		String.fromCodePoint(num1[, ...[, numN]])
+		str.charAt(index)
+		str.charCodeAt(index)
+		str.codePointAt(pos)
+		str.concat(string2, string3[, ..., stringN])
+		str.endsWith(searchString[, length])
+		str.includes(searchString[, position])
+		str.indexOf(searchValue[, fromIndex])
+		str.lastIndexOf(searchValue[, fromIndex])
+		referenceStr.localeCompare(compareString[, locales[, options]])
+		str.match(regexp)
+		str.matchAll(regexp)
+		str.normalize([form]);
+		str.padEnd(targetLength [, padString])
+		str.padStart(targetLength [, padString])
+		str.repeat(count);
+		str.replace(regexp|substr, newSubStr|function)
+		str.search(regexp)
+		str.slice(beginIndex[, endIndex])
+		str.split([separator[, limit]])
+		str.startsWith(searchString[, position])
+		str.substring(indexStart[, indexEnd])
+		str.toLowerCase()
+		str.toString()
+		str.toUpperCase()
+		str.trim()
+		str.valueOf()
+
+
 		*/
 		function num_obj_test(){
 			var numObj = new Number(10);

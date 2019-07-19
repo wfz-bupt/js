@@ -50,3 +50,4 @@ module.exports = app => {
 4.app/config-->一些配置比如数据库
 5.extend-->一些utils，比如格式化时间，可以在程序中直接使用：helper.xxx
 6.middleware-->中间件-->路由过来的时候，先经过这些中间件，进行一层转换，再到实际的controller
+7.yield

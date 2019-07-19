@@ -9,9 +9,11 @@ i）在数据绑定的实现方式上，vue利用es5的方法，可以自动的�
   configurable: true,
   get: function () {
     // 收集数据和dom的对应关系，以便当数据改变时，更新dom
+    // 收集依赖
   },
   set: function () {
     // 数据改变时，去更新相应的dom
+    // 派发更新
   }
 })
 react的双向绑定的原理？？
