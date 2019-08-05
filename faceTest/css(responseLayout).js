@@ -1,3 +1,13 @@
+一、css伪类系统学习
+伪类索引：
+:active/:hover/:visited/:link(未访问链接)
+:only-child/:only-of-type/last-child/last-of-type/first-child/first-of-type/
+:nth-child()/:nth-of-type()/:not（选择器）/:nth-last-child()/:nth-last-of-type()
+type总带of，child总不带
+
+
+
+二、水平垂直居中
 分开讲，而不是合并着讲
 已知元素尺寸、未知元素尺寸
 1.元素垂直水平居中
@@ -48,5 +58,9 @@ i）元素的margin-top与其第一个常规文档流的子元素的margin-top
 i）元素的margin-bottom与其下一个常规文档流的兄弟元素的margin-top
 i）height为auto的元素的margin-bottom与其最后一个常规文档流的子元素的margin-bottom
 i）高度为0并且最小高度也为0，不包含常规文档流的子元素，并且自身没有建立新的BFC的元素的margin-top和margin-bottom
+
+
+
+三、重绘和回流
 
 BFC

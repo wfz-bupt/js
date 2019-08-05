@@ -180,6 +180,7 @@ this指向currentTarget
 this指向监听器所在的dom元素
 
 
+
 正则表达式系统化学习
 正则表达式在js中也是一种对象，用于匹配字符串中 字符组合的模式。被用于RegExp的exec和test方法
 和string的match、search、replace、split方法
@@ -218,9 +219,127 @@ m：多行搜索
 4.1 改变输入字符串的顺序
 4.2 用特殊字符检验输入
 
-原型链系统学习
+
+
+闭包系统化学习
+1.闭包是什么
+闭包是函数和声明该函数的词法环境的组合（函数中的函数），这个环境包含了这个闭包创建时所能访问到的所有局部变量
+2.用处
+2.1 函数工厂
+类似于面向对象编程，当你使用只有一个方法的对象时，可以使用闭包
+当作函数工厂使用，例如：点击不同的按钮，调整不同的字号，就可以建立一个函数工厂，然后赋值为事件回调。
+function makeSizer(size) {
+  return function() {
+    document.body.style.fontSize = size + 'px';
+  };
+}
+
+var size12 = makeSizer(12);
+var size14 = makeSizer(14);
+var size16 = makeSizer(16);
+document.getElementById('size-12').onclick = size12;
+document.getElementById('size-14').onclick = size14;
+document.getElementById('size-16').onclick = size16;
+2.2 用闭包模拟私有方法（利用匿名闭包创建一个模块）
+创建一个类或者一个模块，只允许本类或者模块访问私有变量或者方法，别的类或者模块只能访问导出的公共部分。以这种方式
+使用闭包，提供了很多与面向对象编程相关的好处，特别是数据隐藏和封装
+var Counter = (function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
+  }
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  }   
+})();
+3.在循环中创建闭包，一个常见错误
+function showHelp(help) {
+  document.getElementById('help').innerHTML = help;
+}
+
+function setupHelp() {
+  var helpText = [
+      {'id': 'email', 'help': 'Your e-mail address'},
+      {'id': 'name', 'help': 'Your full name'},
+      {'id': 'age', 'help': 'Your age (you must be over 16)'}
+    ];
+
+  for (var i = 0; i < helpText.length; i++) {
+    var item = helpText[i];
+    document.getElementById(item.id).onfocus = function() {
+      showHelp(item.help);
+    }
+  }
+}
+
+setupHelp();
+
+解决办法1: 使用函数工厂创建闭包
+function makeHelpCallback(help) {
+  return function() {
+    showHelp(help);
+  };
+}
+
+for (var i = 0; i < helpText.length; i++) {
+  var item = helpText[i];
+  document.getElementById(item.id).onfocus = makeHelpCallback(item.help);
+}
+解决办法2: 匿名闭包
+for (var i = 0; i < helpText.length; i++) {
+  (function() {
+     var item = helpText[i];
+     document.getElementById(item.id).onfocus = function() {
+       showHelp(item.help);
+     }
+  })(); // 马上把当前循环项的item与事件回调相关联起来
+}
+解决办法3: 使用let
+for (var i = 0; i < helpText.length; i++) {
+  let item = helpText[i];
+  document.getElementById(item.id).onfocus = function() {
+    showHelp(item.help);
+  }
+}
+4.性能考量
+
+
+
+
+继承与原型链系统学习
+1.是什么
+js是动态的，不提供一个class实现。
+每个对象都有一个__proto__私有属性，指向它的构造函数的原型对象(prototype)。该原型对象也有自己的一个原型对象，层层向上直到
+一个对象的原型对象为null
+2.基于原型链的继承
+2.1 继承属性
+当试图访问一个对象的属性时，不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象原型的原型，依次层层向上搜索，直到找到或者到达最顶层
+在原型链上查找属性比较耗时，对性能有副作用。
+2.2 继承方法
+3.在js中使用原型
+4.使用不同的方法来创建对象和生成原型链
+4.1 使用语法结构创建的对象
+var o = { a: 1 }
+原型链：o -> Object.prototype -> null
+
+
 promise系统学习
+实现简单的promise、用promise实现promise.all
+实现数组的flattern
+
+
 算法
 vue
 https系统学习
+js和其他语言的优缺点？
+virtual dom的优缺点
 
+倒计时组件
