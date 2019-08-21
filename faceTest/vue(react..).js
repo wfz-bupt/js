@@ -41,4 +41,5 @@ beforeCreate-->created-->beforeMounted-->beforeMounte-->mounted-->beforeDestory-
 8.<keep-alive></keep-alive>的作用
 9.vue生命周期钩子函数
 10.vue的全局函数
+11.vue提供的指令有哪些？
 // Vue.use  Vue.extend  Vue.component  Vue.directive  
